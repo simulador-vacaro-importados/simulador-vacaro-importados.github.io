@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Google fonts -->
+    <link href="plugins/googlefont/fonts.css" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="plugins/bootstrap/bootstrap.css">
+    <link rel="stylesheet" href="plugins/aos/aos.css">
+
+    <link rel="fluid-icon" href="/images/vacaroicon.ico" title="Vacaro importados">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
+        <a class="navbar-brand" href="#">Vacaro Importados</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Cáculadora</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="container">
+        <div class="row my-2">
+            <div class="col-auto mx-auto">
+                <img src="images/vacaro.png" alt="" srcset="">
+            </div>
+        </div>
+        <div class="row">
+            <div class="mx-auto card shadow-lg" data-aos="fade-left">
+                <div class="card-body">
+                    <h5 class="card-title">Simule aqui o calculo da sua compra</h5>
+                    
+                    <div class="row my-2">
+                        <div class="form-group col">
+                            <label for="valorItem">Valor do item</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">R$</span>
+                                </div>
+                                <input type="text" id="valorItem" class="form-control" aria-label="valor do item">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group col">
+                            <label for="valorEntrada">Valor de entrada</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">R$</span>
+                                </div>
+                                <input type="text" id="valorEntrada" class="form-control" aria-label="valor da entrada">
+                            </div>
+                        </div>                        
+                    </div>
+
+                    <div class="row" id="resultado" style="display: none;">
+                        <div class="col-12">
+                            <p>Valor em dinheiro <span id="valorDinheiro"></span></p>
+                            <p>Débito à vista <span id="debitoAvista"></span></p>
+                        </div>
+                   
+                        <div class="col-12">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>Vezes</th>
+                                        <th>Valor da parcela</th>
+                                        <th>Valor total</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container my-5 p-5">
+        <div class="row">
+            <div class="col-12 col-md-8 mx-auto my-4">
+                <div class="row">
+                    <a href="#" class="col-12 col-sm-4 text-center ">
+                        <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg" alt="" srcset="">
+                        <br/>
+                        <span>Entre em contato.</span>
+                    </a>
+                    <a href="https://web.facebook.com/vacaroimportados" class="col-12 col-sm-4 text-center">
+                        <img class="img-fluid mx-auto" src="images/icons/facebook.svg" alt="" srcset="">
+                        <br/>
+                        <span>Siga nas redes sociais</span>
+                    </a>
+                    <a href="https://www.instagram.com/vacaroimportados/" class="col-12 col-sm-4 text-center">
+                        <img class="img-fluid mx-auto" src="images/icons/instagram.svg" alt="" srcset="">
+                        <br/>
+                        <span>Compartilhe seu momento</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="plugins/jquery/jquery.js"></script>
+    <script src="plugins/popper/popper.js"></script>
+    <script src="plugins/bootstrap/bootstrap.js"></script>
+    <script src="plugins/aos/aos.js"></script>
+    <script>
+        var taxas = { 
+                    1 : 1.0416,
+                    2 : 1.0479,
+                    3 : 1.0512,
+                    4 : 1.0545,
+                    5 : 1.0578,
+                    6 : 1.0610,
+                    7 : 1.0691,
+                    8 : 1.0724,
+                    9 : 1.0756,
+                    10 : 1.0787,
+                    11 : 1.0819,
+                    12 : 1.0851
+                }
+        function addRow(content) {
+            $("#body").append("<tr>"+content+"</tr>");
+        }
+
+        function formatBr(value){
+            return value.toLocaleString('pt-br', {minimumFractionDigits: 2})
+        }
+
+        function calcule(valor, entrada){
+            $("#body").html("");
+            $("#resultado").show();
+            valor = valor ?? 0;
+            entrada = entrada ?? 0;
+
+            valor = valor - entrada;
+
+            $("#valorDinheiro").html("R$ " + formatBr(valor));
+
+            for (const vezes in taxas) {
+                var taxa = taxas[vezes];
+                var total = (valor * taxa)
+                var divisao = (total / vezes);
+                addRow("<td>" + vezes + "</td><td>R$ " + formatBr(divisao) + "</td><td>R$ " + formatBr(total) + "</td>");
+            }
+        }
+
+        $(function(){
+            var valorItem = $("#valorItem");
+            var valorEntrada = $("#valorEntrada");
+
+            valorItem.on('keyup', function(){
+                calcule(valorItem.val(), valorEntrada.val());
+            });
+            valorEntrada.on('keyup', function(){
+                calcule(valorItem.val(), valorEntrada.val());
+            });
+       
+            AOS.init();
+        });
+    </script>
+</body>
+
+</html>
