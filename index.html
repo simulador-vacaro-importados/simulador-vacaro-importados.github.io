@@ -18,25 +18,10 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-transparent">
-        <a class="navbar-brand" href="#">Vacaro Importados</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Abrir menu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-    
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Calculadora</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
     <section class="container">
         <div class="row my-2">
-            <div class="col-auto mx-auto">
-                <img src="images/vacaro.png" alt="" srcset="">
+            <div class="col-12 col-md-5 mx-auto">
+                <img src="images/vacaro-new.jpeg" class="img-fluid" alt="" srcset="">
             </div>
         </div>
         <div class="row">
@@ -110,17 +95,17 @@
                     <a href class="col-12 col-sm-4 text-center btn-whatapp">
                         <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg" alt="" srcset="">
                         <br/>
-                        <span>Contato via Whatsapp.</span>
+                        <span>Contato via Whatsapp</span>
                     </a>
                     <a href="https://web.facebook.com/vacaroimportados" class="col-12 col-sm-4 text-center">
                         <img class="img-fluid mx-auto" src="images/icons/facebook.svg" alt="" srcset="">
                         <br/>
-                        <span>Siga nas redes sociais</span>
+                        <span>Facebook</span>
                     </a>
                     <a href="https://www.instagram.com/vacaroimportados/" class="col-12 col-sm-4 text-center">
                         <img class="img-fluid mx-auto" src="images/icons/instagram.svg" alt="" srcset="">
                         <br/>
-                        <span>Compartilhe seu momento</span>
+                        <span>Instagram</span>
                     </a>
                 </div>
             </div>
@@ -193,13 +178,12 @@
        
             AOS.init();
 
-            $('.btn-whatapp').click(function(){
-                var WhatsAppUrl = 'https://web.whatsapp.com/send';
-                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
-                    WhatsAppUrl = 'https://api.whatsapp.com/send'; 
-                }
-                window.open(WhatsAppUrl+'?phone=51996802666');
-            })
+            var WhatsAppUrl = 'https://web.whatsapp.com/send';
+            if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                WhatsAppUrl = 'https://api.whatsapp.com/send'; 
+            }
+
+            $('.btn-whatapp').attr('href',WhatsAppUrl+'?phone=51996802666');
         });
     </script>
 </body>
