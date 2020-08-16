@@ -27,7 +27,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Cáculadora</a>
+                    <a class="nav-link" href="#">Calculadora</a>
                 </li>
             </ul>
         </div>
@@ -46,34 +46,46 @@
                     
                     <div class="row my-2">
                         <div class="form-group col">
-                            <label for="valorItem">Valor do item</label>
+                            <label for="valorItem">Valor do Item</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
                                 </div>
-                                <input type="text" id="valorItem" class="form-control" aria-label="valor do item">
+                                <input type="text" id="valorItem" class="form-control money" aria-label="valor do item">
                             </div>
                         </div>
                         
                         <div class="form-group col">
-                            <label for="valorEntrada">Valor de entrada</label>
+                            <label for="valorEntrada">Valor de Entrada</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
                                 </div>
-                                <input type="text" id="valorEntrada" class="form-control" aria-label="valor da entrada">
+                                <input type="text" id="valorEntrada" class="form-control money" aria-label="valor da entrada">
                             </div>
                         </div>                        
                     </div>
 
                     <div class="row" id="resultado" style="display: none;">
                         <div class="col-12">
-                            <p>Valor em dinheiro <span id="valorDinheiro"></span></p>
-                            <p>Débito à vista <span id="debitoAvista"></span></p>
+                            <table class="table table-sm mb-4">
+                                <thead>
+                                    <tr>
+                                        <th>Valor em Dinheiro ou TED</th>
+                                        <th>Débito à vista</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td id="valorDinheiro"></td>
+                                        <td id="debitoAvista"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                    
                         <div class="col-12">
-                            <table class="table">
+                            <table class="table table-hover table-sm">
                                 <thead>
                                     <tr>
                                         <th>Vezes</th>
@@ -95,10 +107,10 @@
         <div class="row">
             <div class="col-12 col-md-8 mx-auto my-4">
                 <div class="row">
-                    <a href="#" class="col-12 col-sm-4 text-center ">
+                    <a href class="col-12 col-sm-4 text-center btn-whatapp">
                         <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg" alt="" srcset="">
                         <br/>
-                        <span>Entre em contato.</span>
+                        <span>Contato via Whatsapp.</span>
                     </a>
                     <a href="https://web.facebook.com/vacaroimportados" class="col-12 col-sm-4 text-center">
                         <img class="img-fluid mx-auto" src="images/icons/facebook.svg" alt="" srcset="">
@@ -119,39 +131,44 @@
     <script src="plugins/jquery/jquery.js"></script>
     <script src="plugins/popper/popper.js"></script>
     <script src="plugins/bootstrap/bootstrap.js"></script>
+    <script src="plugins/jquery-mask/jquery.mask.min.js"></script>
     <script src="plugins/aos/aos.js"></script>
     <script>
-        var taxas = { 
-                    1 : 1.0416,
-                    2 : 1.0479,
-                    3 : 1.0512,
-                    4 : 1.0545,
-                    5 : 1.0578,
-                    6 : 1.0610,
-                    7 : 1.0691,
-                    8 : 1.0724,
-                    9 : 1.0756,
-                    10 : 1.0787,
-                    11 : 1.0819,
-                    12 : 1.0851
+        var taxas = {
+                    1 : 1.02041,
+                    2 : 1.05013,
+                    3 : 1.05515,
+                    4 : 1.05996,
+                    5 : 1.06483,
+                    6 : 1.06975,
+                    7 : 1.07981,
+                    8 : 1.08486,
+                    9 : 1.08995,
+                    10 : 1.09517,
+                    11 : 1.10036,
+                    12 : 1.10561
                 }
         function addRow(content) {
             $("#body").append("<tr>"+content+"</tr>");
         }
 
         function formatBr(value){
-            return value.toLocaleString('pt-br', {minimumFractionDigits: 2})
+            return value.toLocaleString('pt-br', {minimumFractionDigits: 2, maximumFractionDigits:2})
         }
 
         function calcule(valor, entrada){
             $("#body").html("");
             $("#resultado").show();
-            valor = valor ?? 0;
-            entrada = entrada ?? 0;
+            valor =  valor > 0 ? (valor/100) : 0;
+            entrada = entrada > 0 ? (entrada/100) : 0;
+
+            $("#debitoAvista").html("R$ " + formatBr(valor));
+
+            var desconto = valor > 200 ? (valor - 50) : valor;
+
+            $("#valorDinheiro").html("R$ " + formatBr(desconto));
 
             valor = valor - entrada;
-
-            $("#valorDinheiro").html("R$ " + formatBr(valor));
 
             for (const vezes in taxas) {
                 var taxa = taxas[vezes];
@@ -166,13 +183,23 @@
             var valorEntrada = $("#valorEntrada");
 
             valorItem.on('keyup', function(){
-                calcule(valorItem.val(), valorEntrada.val());
+                calcule(valorItem.cleanVal(), valorEntrada.cleanVal());
             });
             valorEntrada.on('keyup', function(){
-                calcule(valorItem.val(), valorEntrada.val());
+                calcule(valorItem.cleanVal(), valorEntrada.cleanVal());
             });
+
+            $('.money').mask('000.000.000.000.000,00', {reverse: true});
        
             AOS.init();
+
+            $('.btn-whatapp').click(function(){
+                var WhatsAppUrl = 'https://web.whatsapp.com/send';
+                if( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+                    WhatsAppUrl = 'https://api.whatsapp.com/send'; 
+                }
+                window.open(WhatsAppUrl+'?phone=51996802666');
+            })
         });
     </script>
 </body>
