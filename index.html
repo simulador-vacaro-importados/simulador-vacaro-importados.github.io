@@ -25,7 +25,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="mx-auto card shadow-lg" data-aos="fade-left">
+            <div class="mx-auto col-12 col-md-5 card shadow-lg" data-aos="fade-left">
                 <div class="card-body">
                     <h5 class="card-title">Simule aqui o calculo da sua compra</h5>
                     
@@ -56,26 +56,28 @@
                             <table class="table table-sm mb-4">
                                 <thead>
                                     <tr>
-                                        <th>Valor em Dinheiro ou TED</th>
+                                        <th>Valor com Desconto Dinheiro ou TED</th>
+                                        <th id="valorDinheiro" class='text-right'></th>
+                                    </tr>
+                                    <tr>
                                         <th>Débito à vista</th>
+                                        <th id="debitoAvista" class='text-right'></th>
+                                    </tr>
+                                    <tr>
+                                        <th>Valor a ser parcelado</th>
+                                        <th id="valorAParcelar" class='text-right'></th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td id="valorDinheiro"></td>
-                                        <td id="debitoAvista"></td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
                    
                         <div class="col-12">
-                            <table class="table table-hover table-sm">
+                            <table class="table table-hover table-sm text-center">
                                 <thead>
                                     <tr>
                                         <th>Vezes</th>
                                         <th>Valor da parcela</th>
-                                        <th>Valor total</th>
+                                        <th class='text-right'>Valor total</th>
                                     </tr>
                                 </thead>
                                 <tbody id="body">
@@ -148,18 +150,20 @@
             entrada = entrada > 0 ? (entrada/100) : 0;
 
             $("#debitoAvista").html("R$ " + formatBr(valor));
-
+            
             var desconto = valor > 200 ? (valor - 50) : valor;
 
             $("#valorDinheiro").html("R$ " + formatBr(desconto));
 
             valor = valor - entrada;
 
+            $("#valorAParcelar").html("R$ " + formatBr(valor));
+
             for (const vezes in taxas) {
                 var taxa = taxas[vezes];
                 var total = (valor * taxa)
                 var divisao = (total / vezes);
-                addRow("<td>" + vezes + "</td><td>R$ " + formatBr(divisao) + "</td><td>R$ " + formatBr(total) + "</td>");
+                addRow("<td>" + vezes + "</td><td>R$ " + formatBr(divisao) + "</td><td class='text-right'>R$ " + formatBr(total) + "</td>");
             }
         }
 
