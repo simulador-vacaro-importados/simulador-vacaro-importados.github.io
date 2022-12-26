@@ -32,7 +32,7 @@
                     
                     <div class="row my-2">
                         <div class="form-group col">
-                            <label for="valorItem">Valor do Item</label>
+                            <label for="valorItem">Valor do Item à Vista</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
@@ -57,11 +57,7 @@
                             <table class="table table-sm mb-4">
                                 <thead>
                                     <tr>
-                                        <th>Valor com Desconto Dinheiro, TED ou PIX</th>
-                                        <th width="110" id="valorDinheiro" class='text-right'></th>
-                                    </tr>
-                                    <tr>
-                                        <th>Valor no Cartão de Débito</th>
+                                        <th>Valor no Cartão de Débito, TED ou PIX</th>
                                         <th width="110" id="debitoAvista" class='text-right'></th>
                                     </tr>
                                     <tr>
@@ -123,24 +119,24 @@
     <script src="plugins/aos/aos.js"></script>
     <script>
          var taxas = {
-                    1 : 1.035,
-                    2 : 1.067,
+                    1 : 1.038,
+                    2 : 1.057,
                     3 : 1.072,
                     4 : 1.076,
                     5 : 1.081,
-                    6 : 1.086,
-                    7 : 1.093,
-                    8 : 1.097,
-                    9 : 1.102,
-                    10 : 1.106,
-                    11 : 1.111,
-                    12 : 1.115,
-                    13 : 1.129,
-                    14 : 1.133,
-                    15 : 1.138,
-                    16 : 1.142,
-                    17 : 1.146,
-                    18 : 1.151
+                    6 : 1.101,
+                    7 : 1.103,
+                    8 : 1.108,
+                    9 : 1.112,
+                    10 : 1.118,
+                    11 : 1.125,
+                    12 : 1.130,
+                    13 : 1.155,
+                    14 : 1.164,
+                    15 : 1.172,
+                    16 : 1.177,
+                    17 : 1.189,
+                    18 : 1.198
                 }
         function addRow(content) {
             $("#body").append("<tr>"+content+"</tr>");
