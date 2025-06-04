@@ -143,6 +143,19 @@
             });
         }
 
+        // Função para limpar e converter o valor para número inteiro em reais
+        function cleanMoney(val) {
+            if (!val) return 0;
+
+            // Remove os pontos (milhares)
+            val = val.replace(/\./g, '');
+
+            // Remove a vírgula e os centavos (se houver)
+            val = val.replace(/,\d{0,2}$/, '');
+
+            return Number(val);
+        }
+
         function calcule(valor, entrada) {
             $("#body").html("");
             $("#resultado").show();
@@ -172,15 +185,23 @@
             var valorItem = $("#valorItem");
             var valorEntrada = $("#valorEntrada");
 
-            valorItem.on('keyup', function () {
-                calcule(Number(valorItem.cleanVal()), Number(valorEntrada.cleanVal()));
-            });
-            valorEntrada.on('keyup', function () {
-                calcule(Number(valorItem.cleanVal()), Number(valorEntrada.cleanVal()));
+            // Aplica a máscara para milhares
+            $('.money').mask('000.000.000.000.000', { reverse: true });
+
+            // Adiciona ",00" no blur se não tiver
+            $('.money').on('blur', function () {
+                let val = $(this).val();
+                if (val && !val.endsWith(',00')) {
+                    $(this).val(val + ',00');
+                }
             });
 
-            $('.money').mask('000.000.000.000.000', {
-                reverse: true
+            // Chama o cálculo ao digitar e ao sair do campo
+            valorItem.on('keyup blur', function () {
+                calcule(cleanMoney(valorItem.val()), cleanMoney(valorEntrada.val()));
+            });
+            valorEntrada.on('keyup blur', function () {
+                calcule(cleanMoney(valorItem.val()), cleanMoney(valorEntrada.val()));
             });
 
             AOS.init();
