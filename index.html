@@ -22,11 +22,11 @@
         <div class="row">
             <div class="mx-auto col-12 col-lg-6 card shadow-lg" data-aos="fade-left">
                 <div class="card-body">
-                    <h5 class="card-title">Simule Aqui o Cálculo da Sua Compra</h5>
+                    <h5 class="card-title">Simule o cálculo da sua compra</h5>
 
                     <div class="row my-2">
                         <div class="form-group col">
-                            <label for="valorItem">Valor do Item à Vista</label>
+                            <label for="valorItem">Valor do Item</label>
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">R$</span>
@@ -181,40 +181,36 @@
             }
         }
 
-        $(function () {
-            var valorItem = $("#valorItem");
-            var valorEntrada = $("#valorEntrada");
+$(function () {
+    var valorItem = $("#valorItem");
+    var valorEntrada = $("#valorEntrada");
 
-            // Aplica a máscara para milhares
-            $('.money').mask('000.000.000.000.000', { reverse: true });
+    // Permite só números inteiros na digitação
+    $('.money').on('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+    });
 
-            // Adiciona ",00" no blur se não tiver
-            $('.money').on('blur', function () {
-                let val = $(this).val();
-                if (val && !val.endsWith(',00')) {
-                    $(this).val(val + ',00');
-                }
-            });
+    // Chama o cálculo ao digitar e ao sair do campo
+    valorItem.on('keyup blur', function () {
+        calcule(cleanMoney(valorItem.val()), cleanMoney(valorEntrada.val()));
+    });
 
-            // Chama o cálculo ao digitar e ao sair do campo
-            valorItem.on('keyup blur', function () {
-                calcule(cleanMoney(valorItem.val()), cleanMoney(valorEntrada.val()));
-            });
-            valorEntrada.on('keyup blur', function () {
-                calcule(cleanMoney(valorItem.val()), cleanMoney(valorEntrada.val()));
-            });
+    valorEntrada.on('keyup blur', function () {
+        calcule(cleanMoney(valorItem.val()), cleanMoney(valorEntrada.val()));
+    });
 
-            AOS.init();
+    AOS.init();
 
-            var WhatsAppUrl = 'https://web.whatsapp.com/send';
-            if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-                WhatsAppUrl = 'https://api.whatsapp.com/send';
-            }
+    var WhatsAppUrl = 'https://web.whatsapp.com/send';
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        WhatsAppUrl = 'https://api.whatsapp.com/send';
+    }
 
-            $('.btn-whatapp').attr('href', WhatsAppUrl + '?phone=+5551999802666');
-        });
+    $('.btn-whatapp').attr('href', WhatsAppUrl + '?phone=+5551999802666');
+});
     </script>
 </body>
 
 </html>
+
 
