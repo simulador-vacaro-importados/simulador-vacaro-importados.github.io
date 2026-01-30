@@ -10,6 +10,15 @@
     <link rel="icon" href="/images/sharkicon.ico" title="Shark Store">
     <link rel="stylesheet" href="css/style.css">
     <title>Simulador - Shark Store</title>
+    <style>
+        #body tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #body tr:nth-child(odd) {
+            background-color: transparent;
+        }
+    </style>
 </head>
 
 <body>
@@ -22,7 +31,7 @@
         <div class="row">
             <div class="mx-auto col-12 col-lg-6 card shadow-lg" data-aos="fade-left">
                 <div class="card-body">
-                    <h5 class="card-title">Simule o cálculo da sua compra</h5>
+                    <h5 class="card-title">Simule aqui o cálculo da sua compra</h5>
 
                     <div class="row my-2">
                         <div class="form-group col">
@@ -51,11 +60,11 @@
                             <table class="table table-sm mb-4">
                                 <thead>
                                     <tr>
-                                        <th>Valor à vista em Dinheiro ou PIX</th>
+                                        <th>Valor do item à vista em Dinheiro ou PIX</th>
                                         <th width="120" id="debitoAvista" class='text-right'></th>
                                     </tr>
                                     <tr>
-                                        <th>Valor a ser Parcelado no Cartão de Crédito</th>
+                                        <th>Valor a ser parcelado no Cartão de Crédito</th>
                                         <th width="120" id="valorAParcelar" class='text-right'></th>
                                     </tr>
                                 </thead>
@@ -212,6 +221,7 @@ $(function () {
 </body>
 
 </html>
+
 
 
 
