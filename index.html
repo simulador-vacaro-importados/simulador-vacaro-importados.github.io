@@ -163,35 +163,40 @@
         return Number(val.replace(/\D/g, ''));
     }
 
-    function calcule(valor, entrada) {
-        $("#body").html("");
-        $("#resultado").show();
+function calcule(valor, entrada) {
+    $("#body").html("");
+    $("#resultado").show();
 
-        valor = valor > 0 ? valor : 0;
-        entrada = entrada > 0 ? entrada : 0;
+    valor = valor > 0 ? valor : 0;
+    entrada = entrada > 0 ? entrada : 0;
 
-        // PIX / Dinheiro
-        $("#valorPix").html("R$ " + formatBr(valor));
+    // Calcula o valor restante após a entrada
+    var restante = valor - entrada;
+    restante = restante > 0 ? restante : 0;
 
-        // Débito com 3%
-        var valorDebito = valor * 1.03;
-        $("#valorDebito").html("R$ " + formatBr(valorDebito));
+    // Valor do item no PIX (já considerando a entrada)
+    $("#valorPix").html("R$ " + formatBr(restante));
 
-        // Crédito
-        valor = valor - entrada;
-        $("#valorAParcelar").html("R$ " + formatBr(valor));
+    // Valor do item no Débito (3% sobre o restante)
+    var valorDebito = restante * 1.03;
+    $("#valorDebito").html("R$ " + formatBr(valorDebito));
 
-        for (const vezes in taxas) {
-            var total = valor * taxas[vezes];
-            var parcela = total / vezes;
+    // Valor a ser parcelado (restante)
+    $("#valorAParcelar").html("R$ " + formatBr(restante));
 
-            addRow(
-                "<td>" + vezes + "</td>" +
-                "<td>R$ " + formatBr(parcela) + "</td>" +
-                "<td class='text-right'>R$ " + formatBr(total) + "</td>"
-            );
-        }
+    // Parcelamento
+    for (const vezes in taxas) {
+        var total = restante * taxas[vezes];
+        var parcela = total / vezes;
+
+        addRow(
+            "<td>" + vezes + "</td>" +
+            "<td>R$ " + formatBr(parcela) + "</td>" +
+            "<td class='text-right'>R$ " + formatBr(total) + "</td>"
+        );
     }
+}
+
 
     $(function () {
         $('.money').on('input', function () {
@@ -216,5 +221,6 @@
 </script>
 </body>
 </html>
+
 
 
