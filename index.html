@@ -99,27 +99,44 @@ table tbody#body tr:nth-child(odd) {
 
 <footer class="container my-5 p-5">
     <div class="row">
-        <div class="col-12 col-lg-8 mx-auto my-4">
+        <div class="col-12 col-lg-10 mx-auto my-4">
             <div class="row">
-                <a href class="col-12 col-sm-4 text-center btn-whatapp">
+
+                <!-- WhatsApp POA -->
+                <a href="#" class="col-12 col-sm-3 text-center btn-whatsapp-poa">
                     <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg">
                     <br>
-                    <span>Contato via Whatsapp</span>
+                    <span>Consultor Shark POA</span>
                 </a>
-                <a href="https://web.facebook.com/sharkstorers" class="col-12 col-sm-4 text-center">
-                    <img class="img-fluid mx-auto" src="images/icons/facebook.svg">
+
+                <!-- WhatsApp Canoas -->
+                <a href="#" class="col-12 col-sm-3 text-center btn-whatsapp-canoas">
+                    <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg">
                     <br>
-                    <span>Facebook</span>
+                    <span>Consultor Shark Canoas</span>
                 </a>
-                <a href="https://www.instagram.com/sharkstorers/" class="col-12 col-sm-4 text-center">
+
+                <!-- Instagram POA -->
+                <a href="https://www.instagram.com/sharkstore.poa/" target="_blank"
+                   class="col-12 col-sm-3 text-center">
                     <img class="img-fluid mx-auto" src="images/icons/instagram.svg">
                     <br>
-                    <span>Instagram</span>
+                    <span>Instagram Shark POA</span>
                 </a>
+
+                <!-- Instagram Canoas -->
+                <a href="https://www.instagram.com/sharkstorers/" target="_blank"
+                   class="col-12 col-sm-3 text-center">
+                    <img class="img-fluid mx-auto" src="images/icons/instagram.svg">
+                    <br>
+                    <span>Instagram Shark Canoas</span>
+                </a>
+
             </div>
         </div>
     </div>
 </footer>
+
 
 <script src="plugins/jquery/jquery.js"></script>
 <script src="plugins/popper/popper.js"></script>
@@ -218,11 +235,21 @@ function calcule(valor, entrada) {
             ? 'https://api.whatsapp.com/send'
             : 'https://web.whatsapp.com/send';
 
-        $('.btn-whatapp').attr('href', WhatsAppUrl + '?phone=+555195536170');
+        $('.btn-whatsapp-poa').attr(
+            'href',
+            WhatsAppUrl + '?phone=555180185132'
+        );
+
+        $('.btn-whatsapp-canoas').attr(
+            'href',
+            WhatsAppUrl + '?phone=555195536170'
+        );
     });
 </script>
+
 </body>
 </html>
+
 
 
 
