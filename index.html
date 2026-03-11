@@ -5,17 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>Simulador Shark</title>
+    <title>Simulador Vacaro</title>
 
-    <!-- PWA / iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="Simulador Shark">
+    <meta name="apple-mobile-web-app-title" content="Simulador Vacaro">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-    <!-- Ícone para iPhone (OBRIGATÓRIO) -->
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
 
-    <!-- Ícones padrão (desktop / Android) -->
     <link rel="icon" type="image/png" sizes="32x32" href="/images/sharkicon.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/images/sharkicon.png">
     <link rel="icon" href="/images/sharkicon.ico">
@@ -23,7 +20,7 @@
     <link href="plugins/googlefont/fonts.css" rel="stylesheet">
     <link rel="stylesheet" href="plugins/bootstrap/bootstrap.css">
     <link rel="stylesheet" href="plugins/aos/aos.css">
-    <link rel="stylesheet" href="css/style.css?v=5">
+    <link rel="stylesheet" href="css/style.css?v=777">
 
     <style>
         table tbody#body tr:nth-child(even) {
@@ -37,7 +34,9 @@
 </head>
 
 <body>
+
 <section class="container">
+
     <div class="row my-2">
         <div class="col-12 col-lg-5 mx-auto">
             <img src="images/shark-new.png" class="img-fluid" alt="">
@@ -46,10 +45,13 @@
 
     <div class="row">
         <div class="mx-auto col-12 col-lg-6 card shadow-lg" data-aos="fade-left">
+
             <div class="card-body">
+
                 <h5 class="card-title">Simule aqui o cálculo da sua compra</h5>
 
                 <div class="row my-2">
+
                     <div class="form-group col">
                         <label for="valorItem">Valor do Item</label>
                         <div class="input-group">
@@ -69,9 +71,11 @@
                             <input type="text" id="valorEntrada" class="form-control money">
                         </div>
                     </div>
+
                 </div>
 
                 <div class="row" id="resultado" style="display:none;">
+
                     <div class="col-12">
                         <table class="table table-sm mb-4">
                             <thead>
@@ -103,46 +107,36 @@
                             <tbody id="body"></tbody>
                         </table>
                     </div>
+
                 </div>
 
             </div>
         </div>
     </div>
+
 </section>
+
 
 <footer class="container my-5 p-5">
     <div class="row">
         <div class="col-12 col-lg-10 mx-auto my-4">
             <div class="row">
 
-                <!-- WhatsApp POA -->
-                <a href="#" class="col-12 col-sm-3 text-center btn-whatsapp-poa">
+                <!-- WhatsApp -->
+                <a href="https://wa.me/5551983579242" target="_blank"
+                   class="col-12 col-sm-6 text-center">
                     <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg">
                     <br>
-                    <span>Consultor Shark POA</span>
+                    <span>Falar comigo no WhatsApp</span>
                 </a>
 
-                <!-- WhatsApp Canoas -->
-                <a href="#" class="col-12 col-sm-3 text-center btn-whatsapp-canoas">
-                    <img class="img-fluid mx-auto" src="images/icons/whatsapp.svg">
-                    <br>
-                    <span>Consultor Shark Canoas</span>
-                </a>
-
-                <!-- Instagram POA -->
-                <a href="https://www.instagram.com/sharkstore.poa/" target="_blank"
-                   class="col-12 col-sm-3 text-center">
+                <!-- OLX -->
+                <a href="https://www.olx.com.br/perfil/guilherme-vacaro-3d05e745"
+                   target="_blank"
+                   class="col-12 col-sm-6 text-center">
                     <img class="img-fluid mx-auto" src="images/icons/instagram.svg">
                     <br>
-                    <span>Instagram Shark POA</span>
-                </a>
-
-                <!-- Instagram Canoas -->
-                <a href="https://www.instagram.com/sharkstorers/" target="_blank"
-                   class="col-12 col-sm-3 text-center">
-                    <img class="img-fluid mx-auto" src="images/icons/instagram.svg">
-                    <br>
-                    <span>Instagram Shark Canoas</span>
+                    <span>Ver meu perfil na OLX</span>
                 </a>
 
             </div>
@@ -158,66 +152,64 @@
 <script src="plugins/aos/aos.js"></script>
 
 <script>
-    var taxas = {
-        1: 1.05,
-        2: 1.05,
-        3: 1.05,
-        4: 1.06,
-        5: 1.07,
-        6: 1.08,
-        7: 1.09,
-        8: 1.10,
-        9: 1.10,
-        10: 1.11,
-        11: 1.11,
-        12: 1.12,
-        13: 1.13,
-        14: 1.14,
-        15: 1.15,
-        16: 1.16,
-        17: 1.17,
-        18: 1.18
-    };
 
-    function addRow(content) {
-        $("#body").append("<tr>" + content + "</tr>");
-    }
+var taxas = {
+    1: 1.05,
+    2: 1.05,
+    3: 1.05,
+    4: 1.06,
+    5: 1.07,
+    6: 1.08,
+    7: 1.09,
+    8: 1.10,
+    9: 1.10,
+    10: 1.11,
+    11: 1.11,
+    12: 1.12,
+    13: 1.13,
+    14: 1.14,
+    15: 1.15,
+    16: 1.16,
+    17: 1.17,
+    18: 1.18
+};
 
-    function formatBr(value) {
-        return value.toLocaleString('pt-br', {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-        });
-    }
+function addRow(content) {
+    $("#body").append("<tr>" + content + "</tr>");
+}
 
-    function cleanMoney(val) {
-        if (!val) return 0;
-        return Number(val.replace(/\D/g, ''));
-    }
+function formatBr(value) {
+    return value.toLocaleString('pt-br', {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+    });
+}
+
+function cleanMoney(val) {
+    if (!val) return 0;
+    return Number(val.replace(/\D/g, ''));
+}
 
 function calcule(valor, entrada) {
+
     $("#body").html("");
     $("#resultado").show();
 
     valor = valor > 0 ? valor : 0;
     entrada = entrada > 0 ? entrada : 0;
 
-    // Calcula o valor restante após a entrada
     var restante = valor - entrada;
     restante = restante > 0 ? restante : 0;
 
-    // Valor do item no PIX (já considerando a entrada)
     $("#valorPix").html("R$ " + formatBr(restante));
 
-    // Valor do item no Débito (3% sobre o restante)
     var valorDebito = restante * 1.03;
     $("#valorDebito").html("R$ " + formatBr(valorDebito));
 
-    // Valor a ser parcelado (restante)
     $("#valorAParcelar").html("R$ " + formatBr(restante));
 
-    // Parcelamento
     for (const vezes in taxas) {
+
         var total = restante * taxas[vezes];
         var parcela = total / vezes;
 
@@ -227,51 +219,27 @@ function calcule(valor, entrada) {
             "<td class='text-right'>R$ " + formatBr(total) + "</td>"
         );
     }
+
 }
 
+$(function () {
 
-    $(function () {
-        $('.money').on('input', function () {
-            this.value = this.value.replace(/\D/g, '');
-        });
+    $('.money').on('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+    });
 
-        $('#valorItem, #valorEntrada').on('keyup blur', function () {
-            calcule(
-                cleanMoney($('#valorItem').val()),
-                cleanMoney($('#valorEntrada').val())
-            );
-        });
-
-        AOS.init();
-
-        var WhatsAppUrl = /Android|iPhone|iPad/i.test(navigator.userAgent)
-            ? 'https://api.whatsapp.com/send'
-            : 'https://web.whatsapp.com/send';
-
-        $('.btn-whatsapp-poa').attr(
-            'href',
-            WhatsAppUrl + '?phone=555180185132'
-        );
-
-        $('.btn-whatsapp-canoas').attr(
-            'href',
-            WhatsAppUrl + '?phone=555195536170'
+    $('#valorItem, #valorEntrada').on('keyup blur', function () {
+        calcule(
+            cleanMoney($('#valorItem').val()),
+            cleanMoney($('#valorEntrada').val())
         );
     });
+
+    AOS.init();
+
+});
+
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
